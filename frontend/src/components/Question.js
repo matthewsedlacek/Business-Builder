@@ -1,3 +1,4 @@
+
 import React from "react";
 
 
@@ -5,7 +6,7 @@ import React from "react";
 const Question = (props) => {
 
 const handleClick = () => {
-  props.editQuestion(props.businessQuestion)
+  props.onEditQuestion(props.businessQuestion)
 }
 
   const { question, answer } = props.businessQuestion

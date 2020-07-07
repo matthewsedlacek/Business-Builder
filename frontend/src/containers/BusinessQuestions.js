@@ -1,5 +1,8 @@
-import React from "react";
+import React, { Fragment } from "react";
 import Question from '../components/Question'
+import EditQuestion from '../components/EditQuestion.js'
+
+const API = 'http://localhost:3000/business'
 
 class BusinessQuestions extends React.Component {
   
@@ -13,7 +16,7 @@ class BusinessQuestions extends React.Component {
     }
 
     fetchQuestions = () => {
-        fetch('http://localhost:3000/business')
+        fetch(API)
         .then(response => response.json())
         .then(data => this.setState({
             questions: data
@@ -23,17 +26,44 @@ class BusinessQuestions extends React.Component {
     renderQuestions = () => {
         let questionList = this.state.questions
         return questionList.map(question => {
-            return <Question key={question.id} businessQuestion={question}/>
+            return <Question key={question.id} businessQuestion={question} onEditQuestion={this.changeQuestion} />
+        })
+    }
+    changeQuestion = questionUpdate => {
+        this.setState ({
+            currentQuestion: questionUpdate
         })
     }
 
-    editQuestion = () => {
-        console.log("I've been clicked")
+    handleChange = (e) => {
+        console.log(e.target.value)
+        let selectedQuestion = this.state.currentQuestion
+        this.setState({
+            currentQuestion: {
+                ...selectedQuestion,
+                [e.target.name]:e.target.value
+            }
+        })
     }
 
+    handlePatch = () => {
+        fetch(`${API}/${this.state.currentQuestion.id}`,{
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+                Accept: 'application/json'
+            },
+                body: JSON.stringify(this.state.currentQuestion)
+            })
+            .then(response => response.json())
+            .then(data => this.setState({
+                questions: [...this.state.questions.map(question => question.id === data.id? data : question)]
+            }))
+        }
 
     render() {
         return (
+            <div>
             <table>
             <tbody>
                 <tr>
@@ -47,6 +77,10 @@ class BusinessQuestions extends React.Component {
                 {this.renderQuestions()}
             </tbody>
             </table>
+            <Fragment>
+                <EditQuestion onHandlePatch={this.handlePatch} onHandleChange={this.handleChange} selectedQuestion={this.state.currentQuestion} />
+            </Fragment>
+            </div>
         );
     }
 };
