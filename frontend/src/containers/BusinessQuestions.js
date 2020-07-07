@@ -4,7 +4,8 @@ import Question from '../components/Question'
 class BusinessQuestions extends React.Component {
   
     state = {
-        questions: []
+        questions: [],
+        currentQuestion: []
     }
 
     componentDidMount() {
@@ -12,7 +13,7 @@ class BusinessQuestions extends React.Component {
     }
 
     fetchQuestions = () => {
-        fetch()
+        fetch('http://localhost:3000/business')
         .then(response => response.json())
         .then(data => this.setState({
             questions: data
@@ -24,6 +25,10 @@ class BusinessQuestions extends React.Component {
         return questionList.map(question => {
             return <Question key={question.id} businessQuestion={question}/>
         })
+    }
+
+    editQuestion = () => {
+        console.log("I've been clicked")
     }
 
 
