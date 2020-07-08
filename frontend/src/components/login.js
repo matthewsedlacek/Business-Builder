@@ -1,17 +1,26 @@
 import React from 'react';
+import { useHistory } from 'react-router';
 
-const Login = () => {
 
-    const handleSubmit =event => {
+
+
+const Login = (props) => {
+    const history = useHistory()
+    
+    const handleSubmit = event => {
         event.preventDefault();
-        console.log('test');
+        props.login(event.target.username.value)
+        history.push(
+            {pathname:  "/"}
+         )
     }
+
     return (
         <div>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={(event) => handleSubmit(event)}>
                 <h1>Login</h1>
                 <p>Enter Username</p>
-                <input type='text'></input>
+                <input name='username' type='text'></input>
                 <input type='submit'></input>
             </form>
         </div>
