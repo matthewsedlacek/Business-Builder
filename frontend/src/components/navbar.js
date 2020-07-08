@@ -8,6 +8,7 @@ const Question = (props) => {
             <ul>
                 <Link className="" to="/login">Log In</Link>
                 <Link className="" to="/businessquestions">Business Questions</Link>
+                <Link className="" to="/createbusiness">Create Business</Link>
             </ul>
       </div>
     );
