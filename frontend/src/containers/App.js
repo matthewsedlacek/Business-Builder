@@ -1,13 +1,15 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch, Redirect, Link } from 'react-router-dom'
 import Login from '../components/login.js'
 import Report from '../components/report.js'
 import BusinessQuestions from './BusinessQuestions.js'
+import Navbar from '../components/navbar'
 
 function App() {
   return (
     <Router>
       <div>
+        <Navbar />
         <Switch>
           <Route exact path='/login' component={Login} />
           <Route exact path='/report' component={Report} />
