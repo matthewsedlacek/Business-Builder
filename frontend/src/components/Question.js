@@ -1,20 +1,48 @@
 import React from "react";
 import GoalList from "./GoalList"
 
+// const ANSWERSAPI = 
+// c
+
 class Question extends React.Component {
 
-  fetchGoals = (e) => {
+  state = {
+    answers: [],
+    goals: ''
+  }
+
+//   componentDidMount () {
+//     this.fetchAnswers()
+//     this.fetchGoals()
+//   }
+
+//   fetchQuestions = () => {
+//     // temporary until we can test for login
+//     fetch(`${API}/1`)
+//     // fetch(`${API}/${localStorage.getItem("currentUser")}`)
+//     .then(response => response.json())
+//     .then(json => 
+//         this.setState({
+//         questions: json.data.attributes.business_questions
+//     })
+//     )    
+// }
+
+
+  renderGoals = (e) => {
     console.log(e)
       return <GoalList businessQuestion={e} />
   }
   
   render() {
-    // const { question, answer } = this.props.businessQuestion
+    const { question, answer, title } = this.props.businessQuestion
   return (
       <tr>
-        <td>{this.props.businessQuestion.question}</td>
-        <td>{this.props.businessQuestion.answer}</td>
-        <button type="button" onClick={(e) => this.fetchGoals(this.props.businessQuestion)}>Show Goals</button>
+        <td>{title}</td>
+        <td>{question !== null ? question : "Use this section for any additional goals"}</td>
+        <td>{answer}</td>
+        {/* <button type="button" onClick={this.renderGoals()}>Edit Question</button> */}
+        <button type="button" onClick={this.renderGoals()}>Show Goals</button>
       </tr>
     );
   }
@@ -22,24 +50,3 @@ class Question extends React.Component {
 
 export default Question;
 
-//   state = {
-//     currentQuestion: '',
-//   }
-
-//   updateGoal = event => {
-//     this.setState ({
-//         [event.target.name]: event.target.value
-//     })
-// }
-
-// handleChange = (e) => {
-//     console.log(e.target.value)
-//     let selectedQuestion = this.state.currentQuestion
-//     this.setState({
-//         currentQuestion: { e }
-//     })
-// }
-
-//   handleClick = () => {
-//     props.onEditQuestion(props.businessQuestion)
-//   }
