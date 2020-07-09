@@ -5,6 +5,7 @@ import Report from '../components/report.js'
 import BusinessQuestions from './BusinessQuestions.js'
 import Navbar from '../components/navbar'
 import CreateBusiness from './CreateBusiness.js'
+import Home from '../components/home.js'
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route exact path='/report' component={Report} />
           <Route exact path='/businessquestions' component={BusinessQuestions} />
           <Route exact path='/createbusiness' component={CreateBusiness} />
+          <Route exact path='/home' component={Home} />
           <Redirect to='/login' />
         </Switch>
       </div>
