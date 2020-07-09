@@ -4,20 +4,21 @@ import { useHistory } from 'react-router';
 
 const Home = (props) => {
     const history = useHistory()
-    let user = JSON.parse(localStorage.getItem('currentUser'))
+    
 
     const handleLogout = event => {
         event.preventDefault()
         props.logout()
         history.push(
-            {pathname:  "/"}
-         )
+            {pathname:  "/login"}
+            )
+            console.log("logout button pressed")
     }
 
     return (
         <div>
             Home Page Stub
-            {console.log(user.attributes.username)}
+            {/* {console.log(props.currentUser.attributes.username)} */}
             <button onClick={(event) => handleLogout(event)}>Logout</button>
         </div>
     )
