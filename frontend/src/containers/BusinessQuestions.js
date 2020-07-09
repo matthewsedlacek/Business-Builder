@@ -1,14 +1,18 @@
 import React, { Fragment } from "react";
 import Question from '../components/Question'
 import EditQuestion from '../components/EditQuestion'
+import GoalList from "../components/GoalList"
 
 const API = 'http://localhost:3000/businesses'
 
 class BusinessQuestions extends React.Component {
   
     state = {
+        alldetails: [],
         questions: [],
-        currentQuestion: ''
+        answers: '',
+        goals: [],
+        currentQuestion: null
     }
 
     componentDidMount() {
@@ -22,18 +26,69 @@ class BusinessQuestions extends React.Component {
         .then(response => response.json())
         .then(json => 
             this.setState({
-            questions: json.data.attributes.business_questions
+            alldetails: json.data.attributes,
+            questions: json.data.attributes.business_questions,
+            answers: json.data.attributes.business_question_answers,
+            goals: json.data.attributes.business_goals
+
         })
         )    
     }
 
+
     renderQuestions = () => {
         let questionList = this.state.questions
-        console.log(questionList)
         return questionList.map(question => {
-            return <Question key={question.id} businessQuestion={question} />
+            return <Question key={question.id} businessQuestion={question} alldetails={this.state.alldetails} answers={this.state.answers} onDisplayGoals={this.displayGoals} />
         })
     }
+
+
+    
+      displayGoals = (passedQuestion) => {
+        this.setState({
+            currentQuestion: passedQuestion
+        })
+
+        }
+
+        renderGoals = () => {
+            if (this.state.currentQuestion) {
+                const currentId = this.state.currentQuestion.id
+                let goalList = [...this.state.goals]
+                let foundGoals = goalList.filter(goal => goal.business_question_answer_id === currentId)
+                return foundGoals.map(foundGoal => <GoalList key={foundGoal.id} goal={foundGoal} />)
+            }
+            return null
+        }
+
+
+    render() {
+        return (
+            <div>
+            <table>
+            <tbody>
+                <tr>
+                <th>
+                    <h3>Category</h3>
+                </th>
+                <th>
+                    <h3>Question</h3>
+                </th>
+                <th>
+                    <h3>Answer</h3>
+                </th>
+                </tr>
+                {this.renderQuestions()}
+            </tbody>
+            </table>
+            {this.renderGoals()}
+            </div>
+        );
+    }
+};
+
+export default BusinessQuestions;
 
     // handleChange = (e) => {
     //     console.log(e.target.value)
@@ -62,31 +117,3 @@ class BusinessQuestions extends React.Component {
     //             questions: [...this.state.questions.map(question => question.id === data.id? data : question)]
     //         }))
     //     }
-
-    render() {
-        return (
-            <div>
-            <table>
-            <tbody>
-                <tr>
-                <th>
-                    <h3>Category</h3>
-                </th>
-                <th>
-                    <h3>Question</h3>
-                </th>
-                <th>
-                    <h3>Answer</h3>
-                </th>
-                </tr>
-                {this.renderQuestions()}
-            </tbody>
-            </table>
-            </div>
-        );
-    }
-};
-
-export default BusinessQuestions;
-
-

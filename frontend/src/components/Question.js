@@ -1,52 +1,29 @@
-import React from "react";
-import GoalList from "./GoalList"
+import React, { Fragment } from "react";
 
-// const ANSWERSAPI = 
-// c
 
 class Question extends React.Component {
 
-  state = {
-    answers: [],
-    goals: ''
+
+  handleClick = () => {
+    this.props.onDisplayGoals(this.props.businessQuestion)
   }
 
-//   componentDidMount () {
-//     this.fetchAnswers()
-//     this.fetchGoals()
-//   }
-
-//   fetchQuestions = () => {
-//     // temporary until we can test for login
-//     fetch(`${API}/1`)
-//     // fetch(`${API}/${localStorage.getItem("currentUser")}`)
-//     .then(response => response.json())
-//     .then(json => 
-//         this.setState({
-//         questions: json.data.attributes.business_questions
-//     })
-//     )    
-// }
-
-
-  renderGoals = (e) => {
-    console.log(e)
-      return <GoalList businessQuestion={e} />
-  }
   
   render() {
-    const { question, answer, title } = this.props.businessQuestion
-  return (
+    const { question, title } = this.props.businessQuestion
+    const ANSWER = this.props.answers.filter(foundAnswer => foundAnswer.business_question_id === this.props.businessQuestion.id)[0]
+
+    return (
+      <Fragment>
       <tr>
         <td>{title}</td>
         <td>{question !== null ? question : "Use this section for any additional goals"}</td>
-        <td>{answer}</td>
-        {/* <button type="button" onClick={this.renderGoals()}>Edit Question</button> */}
-        <button type="button" onClick={this.renderGoals()}>Show Goals</button>
+        <td>{ANSWER.answer}</td>
+        <button type="button" onClick={() => this.handleClick()}>Show Goals</button>
       </tr>
-    );
-  }
-};
-
+      </Fragment>
+    )
+  };
+}
 export default Question;
 
