@@ -46,7 +46,6 @@ class App extends React.Component {
   }
 
   logout = () => {
-    // this.setState({currentUser: ''})
     localStorage.removeItem('currentUser')
   }
 
