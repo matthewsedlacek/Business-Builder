@@ -1,27 +1,19 @@
-import React from "react";
+import React, { Component } from 'react'
 
-const GoalList = (props) => {
+class GoalList extends Component {
 
-const {question, answer } = props.businessQuestion
-
-const onChange = (e) => {
-  props.onHandleChange(e)
-}
-
-const handleSubmit = (e) => {
-  e.preventDefault()
-  props.onHandlePatch()
-}
-
-
+render() {
+const {title, description, status, steps } = this.props.goal
   return (
     <form>
-        <h2>{question}</h2>
-        <p>Enter text here...</p>
-        <textarea type="text" name="answer" value={answer} onChange={(e) => onChange(e)}/>
-        <button type="submit">Submit</button>
+        <h2>{title}</h2>
+        <p>{description}</p>
+        <textarea type="text" name="answer" value={steps} />
+        <label>{status}</label> 
+      <button type="submit">Submit</button>
       </form>
-  );
-};
+        )
+    }
+}
 
 export default GoalList;
