@@ -5,8 +5,8 @@ import Report from '../components/report.js'
 import Home from '../components/home.js'
 import Signup from '../components/signup.js'
 import BusinessQuestions from './BusinessQuestions.js'
-// import Navbar from '../components/navbar'
-// import CreateBusiness from './CreateBusiness.js'
+import Navbar from '../components/navbar'
+import CreateBusiness from './CreateBusiness.js'
 
 // parses currentUser object from localStorage
 // **this is to be used to get currently logged in user**
@@ -54,12 +54,14 @@ class App extends React.Component {
     return (
       <Router>
         <div>
+          <Navbar />
           <Switch>
             <Route exact path='/login' component={ () => <Login login={this.login} />} />
-            <Route exact path='/signup' component={ () => <Signup currentUser={activeUser} login={this.login} />} />
-            <Route exact path="/home" component={ () => <Home currentUser={activeUser} logout={this.logout} />} />
+            <Route exact path='/signup' component={ () => <Signup currentUser={activeUser} />} />
+            <Route exact path="/home" component={ () => <Home currentUser={activeUser}/>} />
             <Route exact path='/report' component={ () => <Report currentUser={activeUser} />} />
             <Route exact path='/businessquestions' component={ () => <BusinessQuestions currentUser={activeUser} />} />
+            <Route exact path='/createbusiness' component={() => <CreateBusiness currentUser={activeUser}/>} />
             { localStorage.currentUser? <Redirect to='/home' /> : <Redirect to='/login' />}
           </Switch>
         </div>
