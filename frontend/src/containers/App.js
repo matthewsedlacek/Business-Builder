@@ -5,6 +5,7 @@ import Report from '../components/report.js'
 import Home from '../components/home.js'
 import Signup from '../components/signup.js'
 import BusinessQuestions from './BusinessQuestions.js'
+import Logout from '../components/logout.js'
 // import Navbar from '../components/navbar'
 // import CreateBusiness from './CreateBusiness.js'
 
@@ -46,7 +47,6 @@ class App extends React.Component {
   }
 
   logout = () => {
-    // this.setState({currentUser: ''})
     localStorage.removeItem('currentUser')
   }
 
