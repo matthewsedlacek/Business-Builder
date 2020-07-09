@@ -5,18 +5,21 @@ import Report from '../components/report.js'
 import Home from '../components/home.js'
 import Signup from '../components/signup.js'
 import BusinessQuestions from './BusinessQuestions.js'
-import Navbar from '../components/navbar'
-import CreateBusiness from './CreateBusiness.js'
+// import Navbar from '../components/navbar'
+// import CreateBusiness from './CreateBusiness.js'
+
+// parses currentUser object from localStorage
+// **this is to be used to get currently logged in user**
+const activeUser = JSON.parse(localStorage.getItem('currentUser'))
 
 class App extends React.Component {
   constructor() {
     super()
     
     this.state = {
-      currentUser: ''
     }
   };
-
+  
   componentDidMount(){
     fetch('http://localhost:3000/users', {
     method: 'GET',
@@ -27,30 +30,23 @@ class App extends React.Component {
   })
   .then(res => res.json())
   .then(json => {
-    // console.log(json.data)
     this.setState({users: json.data})
  })
   }
-
+  // receives username from login form matches to user object in fetched user array and sets
+  // object to currentUser in localStorage as string
   login = (user) => {
     const users = this.state.users
-    // console.log(users[0].attributes.username)
     let u
     for(u of users){
       if (u.attributes.username === user){
-        this.setState({currentUser: u})
         localStorage.setItem('currentUser', JSON.stringify(u))
-        console.log(u)
-        // console.log(localStorage.getItem('currentUser'))
       }
     }
-    // console.log(this.state.currentUser)
-    // this.setState ({currentUser: user})
-    // localStorage.setItem('currentUser', user)  
   }
 
   logout = () => {
-    this.setState({currentUser: ''})
+    // this.setState({currentUser: ''})
     localStorage.removeItem('currentUser')
   }
 
@@ -60,12 +56,11 @@ class App extends React.Component {
         <div>
           <Switch>
             <Route exact path='/login' component={ () => <Login login={this.login} />} />
-            <Route exact path='/signup' component={ () => <Signup handleTestingButton={this.handleTestingButton} login={this.login} />} />
-            <Route exact path="/home" component={ () => <Home currentUser={this.state.currentUser} logout={this.logout} />} />
-            <Route exact path='/report' component={ () => <Report currentUser={this.state.currentUser} />} />
-            <Route exact path='/businessquestions' component={BusinessQuestions} />
+            <Route exact path='/signup' component={ () => <Signup currentUser={activeUser} login={this.login} />} />
+            <Route exact path="/home" component={ () => <Home currentUser={activeUser} logout={this.logout} />} />
+            <Route exact path='/report' component={ () => <Report currentUser={activeUser} />} />
+            <Route exact path='/businessquestions' component={ () => <BusinessQuestions currentUser={activeUser} />} />
             { localStorage.currentUser? <Redirect to='/home' /> : <Redirect to='/login' />}
-            {/* <Redirect to='/login' /> */}
           </Switch>
         </div>
       </Router>
