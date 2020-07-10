@@ -1,9 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 import { Input } from '@material-ui/core';
+import { useHistory } from 'react-router';
+import "./style.css"
 
 
 const Signup = (props) => {
+    const history = useHistory()
 
     const handleSubmit = event => {
         event.preventDefault();
@@ -29,12 +32,17 @@ const Signup = (props) => {
 
         fetch('https://business-builder-backend.herokuapp.com/users', configObj)
         .then(res => res.json())
-        .then(json => console.log(json))
+        .then(json => {
+            props.handleSignUp(json)
+            history.push(
+                {pathname:  "/login"}
+            )
+        })
         .catch(error => alert(error.message))
     }
     
     return (
-        <div>
+        <div className="signUpDiv">
             <form onSubmit={(event) => handleSubmit(event)}>
                 <h1>Create New User</h1>
                 {/* <p>Enter Email Address</p> */}

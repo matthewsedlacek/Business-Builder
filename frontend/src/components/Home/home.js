@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
+import "./style.css"
 
 class Home extends Component {
 
@@ -25,11 +26,13 @@ class Home extends Component {
 
     render() {
         return (
-            <div>
-                <p>Welcome {this.state.currentUser.attributes.first_name}</p>
-                {console.log(this.state.currentUser.attributes)}
-                {/* {props.currentUser.attributes.business.name} */}
-          </div>
+            <div className="userDiv">
+                <h1>User Profile</h1>
+                <p>Name: {this.state.currentUser.attributes.first_name} {this.state.currentUser.attributes.last_name}</p>
+                <p>Email: {this.state.currentUser.attributes.username}</p>
+                {this.state.currentUser.attributes.business ? <p>Business Name: {this.state.currentUser.attributes.business.name}</p> : null}
+                <p>Zip Code: {this.state.currentUser.attributes.zip}</p>
+            </div>
         );
     }
 };

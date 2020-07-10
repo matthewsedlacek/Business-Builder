@@ -2,8 +2,8 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
 import Login from '../components/Login/login.js'
 import Report from '../components/report.js'
-import Home from '../components/home.js'
-import Signup from '../components/signup.js'
+import Home from '../components/Home/home.js'
+import Signup from '../components/SignUp/signup.js'
 import BusinessQuestions from './BusinessQuestions.js'
 import Navbar from '../components/Navbar/navbar'
 import CreateBusiness from './CreateBusiness/CreateBusiness.js'
@@ -62,6 +62,15 @@ class App extends React.Component {
     })
   }
 
+  handleSignUp = (newUser) => {
+    let users = this.state.users;
+    let newUsers = users.push(newUser)
+    console.log(newUsers, users)
+    this.setState({
+      users: newUsers
+    })
+  }
+
   render(){
     return (
       <Router>
@@ -69,7 +78,7 @@ class App extends React.Component {
           <Navbar currentUser={this.state.currentUser} logoutfn={this.logout}/>
           <Switch>
             <Route exact path='/login' component={ () => <Login login={this.login} users={this.state.users}/>} />
-            <Route exact path='/signup' component={ () => <Signup currentUser={activeUser} />} />
+            <Route exact path='/signup' component={ () => <Signup currentUser={activeUser} handleSignUp={this.handleSignUp}/>} />
             {/* <Route exact path="/home" component={ () => <Home currentUser={activeUser}/>} /> */}
             { localStorage.currentUser? <Route exact path="/home" component={ () => <Home currentUser={activeUser}/>} /> : null}
             { localStorage.currentUser? <Route exact path='/report' component={ () => <Report currentUser={activeUser} />} /> : null}
