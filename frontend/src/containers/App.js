@@ -8,6 +8,8 @@ import BusinessQuestions from './BusinessQuestions.js'
 import Navbar from '../components/navbar'
 import CreateBusiness from './CreateBusiness.js'
 
+import './App.css'
+
 // parses currentUser object from localStorage
 // **this is to be used to get currently logged in user**
 const activeUser = JSON.parse(localStorage.getItem('currentUser'))
