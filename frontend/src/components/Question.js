@@ -19,7 +19,7 @@ class Question extends React.Component {
         <td>{title}</td>
         <td>{question !== null ? question : "Use this section for any additional goals"}</td>
         <td>{ANSWER.answer}</td>
-        <button type="button" onClick={() => this.handleClick()}>Show Goals</button>
+        <td><button onClick={() => this.handleClick()}>Show Goals</button></td>
       </tr>
       </Fragment>
     )
