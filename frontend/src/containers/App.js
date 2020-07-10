@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
-import Login from '../components/login.js'
+import Login from '../components/Login/login.js'
 import Report from '../components/report.js'
 import Home from '../components/home.js'
 import Signup from '../components/signup.js'
@@ -42,15 +42,17 @@ class App extends React.Component {
   // object to currentUser in localStorage as string
   login = (user) => {
     const users = this.state.users
-    let u
-    for(u of users){
+    let result = null
+    for(let u of users){
       if (u.attributes.username === user){
         localStorage.setItem('currentUser', JSON.stringify(u))
+        this.setState({
+          currentUser: u
+        })
+        result = u;
       }
     }
-    this.setState({
-      currentUser: user
-    })
+    return result
   }
 
   logout = () => {
@@ -68,10 +70,11 @@ class App extends React.Component {
           <Switch>
             <Route exact path='/login' component={ () => <Login login={this.login} users={this.state.users}/>} />
             <Route exact path='/signup' component={ () => <Signup currentUser={activeUser} />} />
-            <Route exact path="/home" component={ () => <Home currentUser={activeUser}/>} />
-            <Route exact path='/report' component={ () => <Report currentUser={activeUser} />} />
-            <Route exact path='/businessquestions' component={ () => <BusinessQuestions currentUser={activeUser} />} />
-            <Route exact path='/createbusiness' component={() => <CreateBusiness currentUser={activeUser}/>} />
+            {/* <Route exact path="/home" component={ () => <Home currentUser={activeUser}/>} /> */}
+            { localStorage.currentUser? <Route exact path="/home" component={ () => <Home currentUser={activeUser}/>} /> : null}
+            { localStorage.currentUser? <Route exact path='/report' component={ () => <Report currentUser={activeUser} />} /> : null}
+            { localStorage.currentUser? <Route exact path='/businessquestions' component={ () => <BusinessQuestions currentUser={activeUser} />} />: null}
+            { localStorage.currentUser? <Route exact path='/createbusiness' component={() => <CreateBusiness currentUser={activeUser}/>} />: null}
             { localStorage.currentUser? <Redirect to='/home' /> : <Redirect to='/login' />}
           </Switch>
         </div>

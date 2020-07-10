@@ -6,7 +6,13 @@ class Home extends Component {
     state = {
         currentUser: {
             attributes: {
-                first_name: ""
+                first_name: "",
+                last_name: "",
+                zip: null,
+                business:{
+                    id: null,
+                    name: ""
+                }
             }
         }
     }
@@ -21,6 +27,7 @@ class Home extends Component {
         return (
             <div>
                 <p>Welcome {this.state.currentUser.attributes.first_name}</p>
+                {console.log(this.state.currentUser.attributes)}
                 {/* {props.currentUser.attributes.business.name} */}
           </div>
         );

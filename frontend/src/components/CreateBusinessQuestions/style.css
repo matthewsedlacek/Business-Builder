@@ -3,6 +3,7 @@
     border-radius: 10px;
     padding: 2px;
     box-shadow: 5px 5px 3px grey;
+    background-color: lightgray;
 }
 
 .title {
@@ -19,4 +20,5 @@
     width: 95%;
     font-family: "Times New Roman";
     border-radius: 3px;
+    box-shadow: 1px 1px 1px grey;
 }
