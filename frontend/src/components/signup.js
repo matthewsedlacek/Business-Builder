@@ -27,7 +27,7 @@ const Signup = (props) => {
             })
         }
 
-        fetch('http://localhost:3000/users', configObj)
+        fetch('https://business-builder-backend.herokuapp.com/users', configObj)
         .then(res => res.json())
         .then(json => console.log(json))
         .catch(error => alert(error.message))
@@ -38,7 +38,7 @@ const Signup = (props) => {
             <form onSubmit={(event) => handleSubmit(event)}>
                 <h1>Create New User</h1>
                 {/* <p>Enter Email Address</p> */}
-                <div><Input name='username' placeholder='email / username' type='text'/></div>
+                <div><Input autofocus="true"name='username' placeholder='email / username' type='text' autofocus/></div>
                 {/* <p>Enter First Name:</p> */}
                 <div><Input name='first_name' placeholder='first name' type='text' /></div>
                 {/* <p>Enter Last Name:</p> */}
@@ -47,7 +47,7 @@ const Signup = (props) => {
                 <div><Input name='zip' placeholder='zip code' type='text' /></div>
                 <div><Input type='submit' value='Sign Up' /></div>
             </form>
-            Already registered? Log in <Link className="" to="/login">here</Link>
+            Already registered? <Link className="" to="/login">Log in</Link>
         </div>
     )
 }

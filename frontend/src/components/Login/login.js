@@ -3,6 +3,7 @@ import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom'
 import Button from '@material-ui/core/Button';
 import { Input } from '@material-ui/core';
+import './style.css'
 
 
 const Login = (props) => {
@@ -12,21 +13,24 @@ const Login = (props) => {
     // where router logic renders home if login successful and to login if not successful
     const handleSubmit = event => {
         event.preventDefault();
-        props.login(event.target.username.value)
-        history.push(
-            {pathname:  "/home"}
-        )
+        const result = props.login(event.target.username.value)
+        
+        if (result) {
+            history.push(
+                {pathname:  "/home"}
+            )
+        }
     }
 
     return (
-        <div>
+        <div className="login">
             <form onSubmit={(event) => handleSubmit(event)}>
                 <h1>Log In</h1>
                 {/* <p>Enter Username</p> */}
                 <Input name='username' placeholder='username / email' type='text' />
                 <Input type='submit' value="Log In" />
             </form>
-            <div>Not registered yet? Sign up <Link className="" to="/signup">here</Link></div>
+            <div>Not registered yet? <Link className="" to="/signup">Sign up</Link></div>
             {/* <Button variant="contained" color="primary"> */}
       {/* Hello World */}
     {/* </Button> */}
