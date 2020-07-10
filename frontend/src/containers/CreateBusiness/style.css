@@ -1,0 +1,35 @@
+.create {
+    padding: 8px;
+}
+
+.createButton {
+    background-color: grey; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 5px;
+    box-shadow: 5px 5px 3px grey;
+    font-family: "Times New Roman";
+}
+
+.company {
+    border-style: solid;
+    border-radius: 10px;
+    padding: 2px;
+    box-shadow: 5px 5px 3px grey;
+}
+
+.companyLable {
+    font-size: 30px;
+    font-family: "Times New Roman";
+}
+
+.companyName {
+    font-size: 18px;
+    font-family: "Times New Roman";
+    border-radius: 4px;
+}

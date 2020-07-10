@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import CreateBusinessQuestion from '../components/CreateBusinessQuestion.js'
+import CreateBusinessQuestion from '../../components/CreateBusinessQuestions/CreateBusinessQuestion.js'
+import './style.css'
 
 class CreateBusiness extends Component {
 
@@ -66,11 +67,14 @@ class CreateBusiness extends Component {
 
     render() {
         return(
-            <form onSubmit={(event) => this.handleSubmit(event)}>
-                <label>Name of Company:</label>
-                <input type="text" placeholder="Company Name" onChange={(event) => this.handleTitle(event)}></input><br></br><br></br>
+            <form class="create" onSubmit={(event) => this.handleSubmit(event)}>
+                <div class="company">
+                    <label class="companyLable">Name of Company</label><br></br>
+                    <input class="companyName" type="text" placeholder="Company Name" onChange={(event) => this.handleTitle(event)}></input>
+                </div>
+                <br></br><br></br>
                 {this.handleQuestions()}
-                <button type="submit">Create</button>
+                <button class="createButton" type="submit">Create</button>
             </form>
         )
     }

@@ -5,20 +5,22 @@ import Report from '../components/report.js'
 import Home from '../components/home.js'
 import Signup from '../components/signup.js'
 import BusinessQuestions from './BusinessQuestions.js'
-import Navbar from '../components/navbar'
-import CreateBusiness from './CreateBusiness.js'
+import Navbar from '../components/Navbar/navbar'
+import CreateBusiness from './CreateBusiness/CreateBusiness.js'
 
 import './App.css'
 
 // parses currentUser object from localStorage
 // **this is to be used to get currently logged in user**
-const activeUser = JSON.parse(localStorage.getItem('currentUser'))
+let activeUser = JSON.parse(localStorage.getItem('currentUser'))
 
 class App extends React.Component {
   constructor() {
     super()
     
     this.state = {
+      users: [],
+      currentUser: null
     }
   };
   
@@ -28,13 +30,14 @@ class App extends React.Component {
     headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json'
-    }
-  })
-  .then(res => res.json())
-  .then(json => {
-    this.setState({users: json.data})
- })
+      }
+    })
+    .then(res => res.json())
+    .then(json => {
+      this.setState({users: json.data})
+    })
   }
+
   // receives username from login form matches to user object in fetched user array and sets
   // object to currentUser in localStorage as string
   login = (user) => {
@@ -45,19 +48,25 @@ class App extends React.Component {
         localStorage.setItem('currentUser', JSON.stringify(u))
       }
     }
+    this.setState({
+      currentUser: user
+    })
   }
 
   logout = () => {
     localStorage.removeItem('currentUser')
+    this.setState({
+      currentUser: null
+    })
   }
 
   render(){
     return (
       <Router>
         <div>
-          <Navbar />
+          <Navbar currentUser={this.state.currentUser} logoutfn={this.logout}/>
           <Switch>
-            <Route exact path='/login' component={ () => <Login login={this.login} />} />
+            <Route exact path='/login' component={ () => <Login login={this.login} users={this.state.users}/>} />
             <Route exact path='/signup' component={ () => <Signup currentUser={activeUser} />} />
             <Route exact path="/home" component={ () => <Home currentUser={activeUser}/>} />
             <Route exact path='/report' component={ () => <Report currentUser={activeUser} />} />
