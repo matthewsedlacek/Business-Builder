@@ -14,8 +14,8 @@ import TableRow from '@material-ui/core/TableRow';
 
 
 
-const API = 'http://localhost:3000/businesses'
-const GOALUPDATE = 'http://localhost:3000/business_goals'
+const API = 'https://business-builder-backend.herokuapp.com/businesses'
+const GOALUPDATE = 'https://business-builder-backend.herokuapp.com/business_goals'
 
 class BusinessQuestions extends React.Component {
   
@@ -109,7 +109,7 @@ class BusinessQuestions extends React.Component {
                 })
             }
 
-            fetch("http://localhost:3000/business_goals/1", configObject)
+            fetch("https://business-builder-backend.herokuapp.com/business_goals/1", configObject)
             .then(response => response.json())
             .then(data => console.log(data))
         }

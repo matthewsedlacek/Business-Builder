@@ -25,7 +25,7 @@ class App extends React.Component {
   };
   
   componentDidMount(){
-    fetch('http://localhost:3000/users', {
+    fetch('https://business-builder-backend.herokuapp.com/users', {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',

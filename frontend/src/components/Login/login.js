@@ -14,7 +14,7 @@ const Login = (props) => {
     const handleSubmit = event => {
         event.preventDefault();
         const result = props.login(event.target.username.value)
-        console.log(result)
+        
         if (result) {
             history.push(
                 {pathname:  "/home"}
@@ -23,14 +23,14 @@ const Login = (props) => {
     }
 
     return (
-        <div class="login">
+        <div className="login">
             <form onSubmit={(event) => handleSubmit(event)}>
                 <h1>Log In</h1>
                 {/* <p>Enter Username</p> */}
                 <Input name='username' placeholder='username / email' type='text' />
                 <Input type='submit' value="Log In" />
             </form>
-            <div>Not registered yet? Sign up <Link className="" to="/signup">here</Link></div>
+            <div>Not registered yet? <Link className="" to="/signup">Sign up</Link></div>
             {/* <Button variant="contained" color="primary"> */}
       {/* Hello World */}
     {/* </Button> */}

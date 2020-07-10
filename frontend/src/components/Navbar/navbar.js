@@ -14,7 +14,7 @@ const logout = () => {
 
     render() {
         return (
-            <div class='navbar'>
+            <div className='navbar'>
                 <ul>
                     {this.props.currentUser ? <Link className="navbutton" to="/home">Home</Link> : null}
                     {this.props.currentUser ? <Link className="navbutton" to="/businessquestions">Business Questions</Link> : null }

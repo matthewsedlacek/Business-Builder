@@ -11,7 +11,7 @@ class CreateBusiness extends Component {
     }
 
     componentDidMount() {
-        fetch('http://localhost:3000/business_questions')
+        fetch('https://business-builder-backend.herokuapp.com/business_questions')
         .then(resp => resp.json())
         .then(json => {
                 let answersNew = []
