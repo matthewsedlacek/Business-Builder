@@ -1,17 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 import { Input } from '@material-ui/core';
-
+import './david.css'
 
 const Signup = (props) => {
 
     const handleSubmit = event => {
         event.preventDefault();
-
-        console.log(event.target.username.value)
-        console.log(event.target.first_name.value)
-        console.log(event.target.last_name.value)
-        console.log(event.target.zip.value)
 
         const configObj = {
             method: 'POST',
@@ -38,16 +33,16 @@ const Signup = (props) => {
             <form onSubmit={(event) => handleSubmit(event)}>
                 <h1>Create New User</h1>
                 {/* <p>Enter Email Address</p> */}
-                <div><Input name='username' placeholder='email / username' type='text'/></div>
+                <p><Input name='username' placeholder='email / username' type='text'/></p>
                 {/* <p>Enter First Name:</p> */}
-                <div><Input name='first_name' placeholder='first name' type='text' /></div>
+                <p><Input name='first_name' placeholder='first name' type='text' /></p>
                 {/* <p>Enter Last Name:</p> */}
-                <div><Input name='last_name' placeholder='last name' type='text' /></div>
+                <p><Input name='last_name' placeholder='last name' type='text' /></p>
                 {/* <p>Enter Zip Code:</p> */}
-                <div><Input name='zip' placeholder='zip code' type='text' /></div>
-                <div><Input type='submit' value='Sign Up' /></div>
+                <p><Input name='zip' placeholder='zip code' type='text' /></p>
+                <p><Input type='submit' value='Sign Up' /></p>
             </form>
-            Already registered? Log in <Link className="" to="/login">here</Link>
+            <p>Already registered? Log in <Link className="" to="/login">here</Link></p>
         </div>
     )
 }

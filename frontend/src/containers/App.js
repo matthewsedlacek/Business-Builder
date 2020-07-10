@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
 import Login from '../components/login.js'
-import Report from '../components/report.js'
+import Profile from '../components/profile.js'
 import Home from '../components/home.js'
 import Signup from '../components/signup.js'
 import BusinessQuestions from './BusinessQuestions.js'
@@ -60,7 +60,7 @@ class App extends React.Component {
             <Route exact path='/login' component={ () => <Login login={this.login} />} />
             <Route exact path='/signup' component={ () => <Signup currentUser={activeUser} />} />
             <Route exact path="/home" component={ () => <Home currentUser={activeUser}/>} />
-            <Route exact path='/report' component={ () => <Report currentUser={activeUser} />} />
+            <Route exact path='/profile' component={ () => <Profile currentUser={activeUser} />} />
             <Route exact path='/businessquestions' component={ () => <BusinessQuestions currentUser={activeUser} />} />
             <Route exact path='/createbusiness' component={() => <CreateBusiness currentUser={activeUser}/>} />
             { localStorage.currentUser? <Redirect to='/home' /> : <Redirect to='/login' />}
