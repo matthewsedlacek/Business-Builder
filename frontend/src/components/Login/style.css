@@ -1,0 +1,11 @@
+.login {
+    border-style: solid;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 5px 5px 3px grey;
+    background-color: lightgray;
+    width: 30%;
+    margin: auto;
+    text-align: center;
+    margin-top:10px;
+}
