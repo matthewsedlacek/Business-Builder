@@ -99,7 +99,7 @@ class BusinessQuestions extends React.Component {
     render() {
         return (
             <div>
-            <table className={classes.table}>
+            <table className="table">
             <tbody>
                 <tr>
                 <th>

@@ -1,14 +1,30 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 
-const Home = (props) => {
+class Home extends Component {
 
-    return (
-        <div>
-            <p>Welcome {props.currentUser.attributes.first_name}</p>
-            {/* {props.currentUser.attributes.business.name} */}
-      </div>
-    );
+    state = {
+        currentUser: {
+            attributes: {
+                first_name: ""
+            }
+        }
+    }
+
+    componentDidMount() {
+        this.setState({
+            currentUser: JSON.parse(localStorage.getItem('currentUser'))
+        })
+    }
+
+    render() {
+        return (
+            <div>
+                <p>Welcome {this.state.currentUser.attributes.first_name}</p>
+                {/* {props.currentUser.attributes.business.name} */}
+          </div>
+        );
+    }
 };
 
 export default Home;
