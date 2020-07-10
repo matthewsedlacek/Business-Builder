@@ -1,18 +1,23 @@
-import React, { Fragment } from "react";
+import React from "react";
 import Question from '../components/Question'
 import EditQuestion from '../components/EditQuestion'
 import GoalList from "../components/GoalList"
+import { Button } from '@material-ui/core';
+
+
 
 const API = 'http://localhost:3000/businesses'
+const GOALUPDATE = 'http://localhost:3000/business_goals'
 
 class BusinessQuestions extends React.Component {
   
     state = {
-        alldetails: [],
+
         questions: [],
         answers: '',
         goals: [],
-        currentQuestion: null
+        currentQuestion: null,
+        currentGoal: {id: null, value: null}
     }
 
     componentDidMount() {
@@ -26,7 +31,7 @@ class BusinessQuestions extends React.Component {
         .then(response => response.json())
         .then(json => 
             this.setState({
-            alldetails: json.data.attributes,
+
             questions: json.data.attributes.business_questions,
             answers: json.data.attributes.business_question_answers,
             goals: json.data.attributes.business_goals
@@ -51,22 +56,50 @@ class BusinessQuestions extends React.Component {
         })
 
         }
-
+        
         renderGoals = () => {
             if (this.state.currentQuestion) {
                 const currentId = this.state.currentQuestion.id
                 let goalList = [...this.state.goals]
                 let foundGoals = goalList.filter(goal => goal.business_question_answer_id === currentId)
-                return foundGoals.map(foundGoal => <GoalList key={foundGoal.id} goal={foundGoal} />)
+                return foundGoals.map(foundGoal => <GoalList key={foundGoal.id} goal={foundGoal} onUpdateGoal={this.updateGoal} onHandlePatch={this.handlePatch} />)
             }
             return null
+        }
+
+        updateGoal = (e, newId) => {
+            this.setState({
+                currentGoal: {
+                    id: newId,
+                    value: e.target.value
+                }
+            })
+        }
+
+        handlePatch = () => {
+            console.log(this.state.currentGoal.value)
+
+            const configObject = {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json"
+                },
+                body: JSON.stringify({
+                    "steps": this.state.currentGoal.value
+                })
+            }
+
+            fetch("http://localhost:3000/business_goals/1", configObject)
+            .then(response => response.json())
+            .then(data => console.log(data))
         }
 
 
     render() {
         return (
             <div>
-            <table>
+            <table className={classes.table}>
             <tbody>
                 <tr>
                 <th>
@@ -90,30 +123,3 @@ class BusinessQuestions extends React.Component {
 
 export default BusinessQuestions;
 
-    // handleChange = (e) => {
-    //     console.log(e.target.value)
-    //     let selectedQuestion = this.state.currentQuestion
-    //     this.setState({
-    //         currentQuestion: { e }
-    //     })
-    // }
-    
-    //   handleClick = () => {
-    //     props.onEditQuestion(props.businessQuestion)
-    //   }
-
-
-    // handlePatch = () => {
-    //     fetch(`${API}/${this.state.currentQuestion.id}`,{
-    //         method: 'PATCH',
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //             Accept: 'application/json'
-    //         },
-    //             body: JSON.stringify(this.state.currentQuestion)
-    //         })
-    //         .then(response => response.json())
-    //         .then(data => this.setState({
-    //             questions: [...this.state.questions.map(question => question.id === data.id? data : question)]
-    //         }))
-    //     }
