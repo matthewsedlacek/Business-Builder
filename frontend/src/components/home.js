@@ -5,7 +5,8 @@ const Home = (props) => {
 
     return (
         <div>
-            <p>Welcome to Home</p>
+            <p>Welcome {props.currentUser.attributes.first_name}</p>
+            {/* {props.currentUser.attributes.business.name} */}
       </div>
     );
 };

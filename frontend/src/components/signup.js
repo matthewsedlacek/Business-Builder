@@ -1,5 +1,6 @@
 import React from 'react';
-
+import { Link } from 'react-router-dom'
+import { Input } from '@material-ui/core';
 
 
 const Signup = (props) => {
@@ -36,17 +37,17 @@ const Signup = (props) => {
         <div>
             <form onSubmit={(event) => handleSubmit(event)}>
                 <h1>Create New User</h1>
-                <p>Enter Email Address</p>
-                <input name='username' type='text'/>
-                <p>Enter First Name:</p>
-                <input name='first_name' type='text' />
-                <p>Enter Last Name:</p>
-                <input name='last_name' type='text' />
-                <p>Enter Zip Code:</p>
-                <input name='zip' type='text' />
-                <input type='submit' />
+                {/* <p>Enter Email Address</p> */}
+                <div><Input name='username' placeholder='email / username' type='text'/></div>
+                {/* <p>Enter First Name:</p> */}
+                <div><Input name='first_name' placeholder='first name' type='text' /></div>
+                {/* <p>Enter Last Name:</p> */}
+                <div><Input name='last_name' placeholder='last name' type='text' /></div>
+                {/* <p>Enter Zip Code:</p> */}
+                <div><Input name='zip' placeholder='zip code' type='text' /></div>
+                <div><Input type='submit' value='Sign Up' /></div>
             </form>
-            <button onClick={props.handleTestingButton}>Testing</button>
+            Already registered? Log in <Link className="" to="/login">here</Link>
         </div>
     )
 }
