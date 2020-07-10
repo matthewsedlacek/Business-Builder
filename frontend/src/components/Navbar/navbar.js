@@ -17,8 +17,7 @@ const logout = () => {
             <div className='navbar'>
                 <ul>
                     {this.props.currentUser ? <Link className="navbutton" to="/home">Home</Link> : null}
-                    {this.props.currentUser ? <Link className="navbutton" to="/businessquestions">Business Questions</Link> : null }
-                    {this.props.currentUser ? <Link className="navbutton" to="/createbusiness">Create Business</Link> : null}
+                    {this.props.currentUser ? !this.props.currentUser.attributes.business ? <Link className="navbutton" to="/createbusiness">Create Business</Link> : <Link className="navbutton" to="/businessquestions">Business Questions</Link> : null}
                     {this.props.currentUser ? <Link className="navbutton" to="/login" onClick={() => this.logout()}>Log Out</Link> : <Link className="navbutton" to="/login">Log In</Link> }
                 </ul>
             </div>
