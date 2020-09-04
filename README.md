@@ -40,9 +40,9 @@ Users can:
 
 #### Authors
 
+- Matthew Sedlacek - [GitHub](https://github.com/matthewsedlacek)
 - David Knudson - [GitHub](https://github.com/djknudson)
 - Aidan Muller-Cohn - [GitHub](https://github.com/aidanmc95)
-- Matthew Sedlacek - [GitHub](https://github.com/matthewsedlacek)
 
 #### Special Thanks To
 
